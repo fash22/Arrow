@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %} UPDATE {{ patient.user_name }} {% endblock %}
+
+{% block pagecontent %}
+    <main style="margin-top: 3rem;">
+        <div class="container">
+            <div class="row">
+                <h1>{{ patient.family_name }}, {{ patient.first_name }} </h1>
+                <div class="three columns">
+                    {{ form.bp.label }} {{ form.bp }}
+                    {{ form.metroprolol.label }} {{ form.bp }}
+                    {{ form.anti_histamine.label }} {{ form.anti_histamine }}
+                    {{ form.paracetamol.label }} {{ form.paracetamol }}
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

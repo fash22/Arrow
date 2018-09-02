@@ -6,14 +6,19 @@
     <main style="margin-top: 3rem;">
         <div class="container">
             <div class="row">
-                <div class="four columns offset-by-four columns">
-                    <h1>Hello, {{ account.first_name }}</h1>
-                </div>
-                <div class="four columns offset-by-four columns">
-                    <p style="font-size: 1.8rem;">Blood Pressure: {{ account.bp }}</p>
-                    <p style="font-size: 1.8rem;">Metroprolol: {{ account.metroprolol }} tablets</p>
-                </div>
+                <h1>{{ account.first_name }}</h1>
                 
+                <div class="four columns offset-by-four columns">
+                    {% if account.bp < 105 or account.bp > 160 %}
+                    <p style="font-size: 1.8rem; font-weight: 700" class="text color-danger">Blood Pressure: {{ account.bp }}</p>
+                    {% else %}
+                    <p style="font-size: 1.8rem; font-weight: 700;" class="text color-success">Blood Pressure: {{ account.bp }}</p>
+                    {% endif %}
+                    <p style="font-size: 1.8rem; font-weight: 700">Metroprolol:  {{ account.metroprolol }} tablets</p>
+                    <p style="font-size: 1.8rem; font-weight: 700">Anti-histamine: {{ account.metroprolol }} tablets</p>
+                    <p style="font-size: 1.8rem; font-weight: 700">Anti-histamine: {{ account.anti_histamine }} tablets</p>
+                    <p style="font-size: 1.8rem; font-weight: 700">Paracetamol: {{ account.paracetamol }} tablets</p>
+                </div>
             </div>
         </div>
     </main>

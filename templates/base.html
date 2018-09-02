@@ -11,14 +11,64 @@
   <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="{{ url_for('static', filename = 'css/normalize.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename = 'css/skeleton.css') }}">
+  <style>
+    /* ui component layout */
+    nav {
+      
+    }
+    nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+        
+    }
+
+    nav ul li {
+        float: left;
+    }
+
+    nav ul li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    .brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    /* colors */
+    .bg.color-success {
+      background-color: #4caf50 !important;
+    }
+    .bg.color-danger {
+      background-color: #f44336 !important;
+    }
+    .text.color-success {
+      color: #4caf50 !important;
+    }
+    .text.color-danger {
+      color: #f44336 !important;
+    }
+    
+
+  </style>
 </head>
 
 <body>
-    <div class="row">
-      <div class="four columns offset-by-four columns">
-        <h1>Paglaum</h1>
-      </div>
-    </div>
+  <nav>
+    <ul>
+      <li><a href="">Home</a></li>
+      <li><a href="">Vitals</a></li>
+      <li><a href="">Medicines</a></li>
+    </ul>
+  </nav>
+  
   {% block pagecontent %} {% endblock %}
 </body>
 

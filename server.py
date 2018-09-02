@@ -31,6 +31,8 @@ class RegisterForm(Form):
     #health related data
     bp = IntegerField('Blood Pressure', validators=[Required()])
     metroprolol = IntegerField('Metroprolol Count', validators=[Required()])
+    anti_histamine = IntegerField('Anti-histamine Count', validators=[Required()])
+    paracetamol = IntegerField('Paracetamol Count', validators=[Required()])
     submit = SubmitField('Add Patient')
 
 class LoginForm(Form):
@@ -52,6 +54,8 @@ class Patient(db.Model):
     #health related data
     bp = db.Column(db.Integer, nullable=True)
     metroprolol = db.Column(db.Integer, nullable=True)
+    anti_histamine = db.Column(db.Integer, nullable=True)
+    paracetamol = db.Column(db.Integer, nullable=True)
 
     @property
     def password(self):
@@ -70,7 +74,7 @@ class Patient(db.Model):
     
 
 @app.route('/patients/add', methods=['GET','POST'])
-def index():
+def add_patient():
     form = RegisterForm()
     patient = {}
     rendered_template = None
@@ -98,13 +102,16 @@ def index():
         user.password = form.password.data
         user.bp = form.bp.data
         user.metroprolol = form.metroprolol.data
+        user.metroprolol = form.metroprolol.data
+        user.anti_histamine = form.anti_histamine.data
+        user.paracetamol = form.paracetamol.data
         db.session.add(user)
         db.session.commit()
         rendered_template = render_template('add_patient_confirmed.html', patient=patient)
    
     return rendered_template
 
-@app.route('/patients')
+@app.route('/patients', methods=['GET', 'POST'])
 def patients_list():
     patients = Patient.query.all()
     print(patients)
@@ -132,6 +139,16 @@ def login():
         
 
     return rendered_template
+
+@app.route('/')
+def sample():
+    return render_template('sample.html')
+
+@app.route('/patients/update/<user_name>')
+def update_patient(user_name):
+    form = RegisterForm()
+    patient = Patient.query.filter(Patient.user_name == user_name)[0]
+    return render_template('update_patient.html', patient=patient, form=form)
 
 if __name__ == '__main__':
     #db.drop_all()

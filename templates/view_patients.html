@@ -15,7 +15,6 @@
                             <th>Family name</th>
                             <th>Age</th>
                             <th>Date of Birth</th>
-                            <th>Password Hash</th>
                         </tr>
                         {% for patient in patients %}
                         <tr>
@@ -26,7 +25,6 @@
                             <td>{{ patient.family_name }}</td>
                             <td>{{ patient.age }}</td>
                             <td>{{ patient.birth_date }}</td>
-                            <td>{{ patient.password_hash }}</td>
                         </tr>
                         {% endfor %}
                     </table>

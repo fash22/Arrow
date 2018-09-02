@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %} Sample {% endblock %}
+{% block pagecontent %}
+<div class="container">
+    <nav>
+                <ul>
+                    <li class="active"><a href="index.php?page=home">Home</a>
+                    </li><li class="<?=($display=='patients')? 'active' : ''?>"><a href="index.php?page=patients"><i class="fa fa-group"></i> Patients</a>
+                
+                <?php if($display=='view' && isset($item)){ ?>
+                    <li><a href="index.php?page=medical&action=<?=$item?>"><i class="fa fa-medkit"></i> Medical</a>
+                <?php } else if($display=='medical'){ ?>
+                    </li><li class="active"><a href="javascript:void(0)"><i class="fa fa-medkit"></i> Medical</a>
+                <?php } else if($item){ ?>
+                    </li><li><a href="index.php?page=medical&action=<?=$item?>"><i class="fa fa-medkit"></i> Medical</a>
+                <?php } else { ?>
+                    </li><li class="inactive"><a class="inactive"><i class="fa fa-medkit"></i> Medical</a>
+                <?php } ?>
+
+                <?php if($display=='view' && isset($item)){ ?>
+                    </li><li><a href="index.php?page=mo_inv&action=<?=$item?>"><i class="fa fa-th-list"></i> Inventory</a>
+                <?php } else if($display=='mo_inv'){ ?>
+                    </li><li class="<?=($display=='mo_inv')? 'active' : ''?>"><a href="javascript:void(0)"><i class="fa fa-th-list"></i> Inventory</a>
+                <?php } else if($item){ ?>
+                    </li><li><a href="index.php?page=mo_inv&action=<?=$item?>"><i class="fa fa-th-list"></i> Inventory</a>
+                <?php } else { ?>
+                    </li><li class="inactive"><a class="inactive"><i class="fa fa-th-list"></i> Inventory</a>
+                <?php } ?>
+                    
+                    </li><li><a href="index.php?page=medicines"><i class="fa fa-list-alt"></i> Medicines</a></li>
+                    <li class="ddown" style="margin-left:15%;">
+                        <a href="index.php?page=profile&action=<?=$_SESSION['userid']?>" class="btnddown"><i class="fa fa-users"></i> <?=(isset($_SESSION['username'])) ? $_SESSION['username'] : 'User' ; ?></a>
+                        <ul class="ddownitems">
+                            <div class="block">
+                                <?php if($_SESSION['usertype']=='A'){ ?>
+                                <li><a href="index.php?page=manage"> Manage Users</a></li>
+                                <?php } else { ?>
+                                <li class="inactive"><a class="inactive"> Manage Users</a></li>
+                                <?php } ?>
+                                <li><a href="system/logout.php"><i class=""></i> Logout</a></li>
+                            </div>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+</div>
+{% endblock %}
