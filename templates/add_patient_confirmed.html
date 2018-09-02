@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %} Patient Added {% endblock %}
+{% block pagecontent %}
+    <main style="margin-top: 3rem;">
+        <div class="container">
+        <div class="row">
+            <div class="six columns offset-by-two columns">
+                <h1>{{patient.user_name}} Was successfuly added</h1>
+                <p>Summary:</p>
+                <p style="font-size: 1.5rem;">
+                    First Name: <strong>{{ patient['first_name'] }}</strong>
+                </p>
+                <p style="font-size: 1.5rem;">
+                    Last Name: <strong>{{ patient['family_name'] }}</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+    </main>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %} {% block title %} Login {% endblock %} {% block pagecontent %}
+<div class="container">
+    <div class="row">
+        <div class="u-full-width">
+            <main style="margin-top: 3rem;">
+                <h1 class="offset-by-four column">Add Patient</h1>
+                <form method="POST" action="/patients/add">
+                    <div class="row">
+                        <div class="four columns">{{ form.birth_date.label }} {{ form.birth_date }} </div>
+                        <div class="four columns">{{ form.age.label }} {{ form.age }}</div>
+                        <div class="four columns">{{ form.gender.label }} {{ form.gender }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="four columns">{{ form.date_admitted.label }} {{ form.date_admitted }}</div>
+                        <div class="four columns">{{ form.user_name.label }} {{ form.user_name()}}</div>
+                        <div class="four columns">{{ form.password.label }} {{ form.password()}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="four columns">{{ form.first_name.label }} {{ form.first_name() }}</div>
+                        <div class="four columns">{{ form.middle_name.label }} {{ form.middle_name()}}</div>
+                        <div class="four columns">{{ form.family_name.label }} {{ form.family_name()}}</div>
+                    </div>
+                    <div class="row">
+                        {{ form.bp.label }} {{ form.bp }}
+                        {{ form.metroprolol.label }} {{ form.metroprolol }}
+                    <br>
+                    </div>
+                    <div class="row">
+                        <div class="four columns offset-by-four columns">
+                            {{ form.submit(class="button-primary u-full-width") }}
+                        </div>
+                    </div>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+{% endblock %}

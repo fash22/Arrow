@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %} Patient Login {% endblock %}
+{% block pagecontent %}
+
+<main style="margin-top: 3rem;">
+    <div class="column">
+        <div class="row">
+            <div class="four columns offset-by-four columns">
+                <div class="u-full-width">
+                    <h2>Patient Login</h2>
+                    <form method="POST" action="/login">
+                        {{ form.user_name.label }} {{ form.user_name(class='button-primary u-full-width') }}
+                        {{ form.password.label }} {{ form.password(class='button-primary u-full-width') }}
+                        {{ form.submit(class='button-primary u-full-width') }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

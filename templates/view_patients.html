@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Patient List {% endblock %}
+{% block pagecontent %}
+    <main style="margin-top: 3rem;">
+        <div style="margin: 4rem">
+            <div class="row">
+                <div class="twelve columns">
+                    <h1>Patient List</h1>
+                    <table>
+                        <tr>
+                            <th>Date Admitted</th>
+                            <th>User name</th>
+                            <th>First name</th>
+                            <th>Middle name</th>
+                            <th>Family name</th>
+                            <th>Age</th>
+                            <th>Date of Birth</th>
+                            <th>Password Hash</th>
+                        </tr>
+                        {% for patient in patients %}
+                        <tr>
+                            <td>{{ patient.date_admitted }}</td>
+                            <td>{{ patient.user_name }}</td>
+                            <td>{{ patient.first_name }}</td>
+                            <td>{{ patient.middle_name }}</td>
+                            <td>{{ patient.family_name }}</td>
+                            <td>{{ patient.age }}</td>
+                            <td>{{ patient.birth_date }}</td>
+                            <td>{{ patient.password_hash }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

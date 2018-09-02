@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %} {{ account.first_name }} {% endblock %}
+
+{% block pagecontent %}
+    {% if account %}
+    <main style="margin-top: 3rem;">
+        <div class="container">
+            <div class="row">
+                <div class="four columns offset-by-four columns">
+                    <h1>Hello, {{ account.first_name }}</h1>
+                </div>
+                <div class="four columns offset-by-four columns">
+                    <p style="font-size: 1.8rem;">Blood Pressure: {{ account.bp }}</p>
+                    <p style="font-size: 1.8rem;">Metroprolol: {{ account.metroprolol }} tablets</p>
+                </div>
+                
+            </div>
+        </div>
+    </main>
+    {% endif %}
+    
+    {% if err_message %}
+    <h1>{{ err_message }}</h1>
+    {% endif %}
+{% endblock %}
