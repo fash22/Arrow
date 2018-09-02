@@ -14,10 +14,22 @@
                     {% else %}
                     <p style="font-size: 1.8rem; font-weight: 700;" class="text color-success">Blood Pressure: {{ account.bp }}</p>
                     {% endif %}
-                    <p style="font-size: 1.8rem; font-weight: 700">Metroprolol:  {{ account.metroprolol }} tablets</p>
-                    <p style="font-size: 1.8rem; font-weight: 700">Anti-histamine: {{ account.metroprolol }} tablets</p>
-                    <p style="font-size: 1.8rem; font-weight: 700">Anti-histamine: {{ account.anti_histamine }} tablets</p>
-                    <p style="font-size: 1.8rem; font-weight: 700">Paracetamol: {{ account.paracetamol }} tablets</p>
+                    {% if account.metroprolol < 10 %}
+                    <p style="font-size: 1.8rem; font-weight: 700" class="text color-danger">Metroprolol:  {{ account.metroprolol }} tablets</p>
+                    {% else %}
+                    <p style="font-size: 1.8rem; font-weight: 700;" class="text color-success">Metroprolol:  {{ account.metroprolol }} tablets</p>
+                    {% endif %}
+                    {% if account.anti_histamine < 10 %}
+                    <p style="font-size: 1.8rem; font-weight: 700" class="text color-danger">Anti-histamine: {{ account.anti_histamine }} tablets</p>
+                    {% else %}
+                    <p style="font-size: 1.8rem; font-weight: 700;" class="text color-success">Anti-histamine: {{ account.anti_histamine }} tablets</p>
+                    {% endif %}
+                    {% if account.paracetamol is None or account.paracetamol < 10 %}
+                    <p style="font-size: 1.8rem; font-weight: 700" class="text color-danger">Paracetamol: {{ account.paracetamol }} tablets</p>
+                    {% else %}
+                    <p style="font-size: 1.8rem; font-weight: 700;" class="text color-success">Paracetamol: {{ account.paracetamol }} tablets</p>
+                    {% endif %}
+                    
                 </div>
             </div>
         </div>

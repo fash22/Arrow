@@ -1,6 +1,6 @@
 # server.py
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 
 from flask.ext.wtf import Form
@@ -113,9 +113,25 @@ def add_patient():
 
 @app.route('/patients', methods=['GET', 'POST'])
 def patients_list():
-    patients = Patient.query.all()
-    print(patients)
-    return render_template('view_patients.html', patients=patients)
+    rendered_template = None
+
+    if request.method == 'GET':
+        patients = Patient.query.all()
+        rendered_template = render_template('view_patients.html', patients=patients)
+    
+    if request.args.get('filterby','') == 'agedesc':
+        patients = db.session.query(Patient).order_by(Patient.age.desc())
+        rendered_template = render_template('view_patients.html', patients=patients)
+
+    if request.args.get('filterby','') == 'ageasc':
+        patients = db.session.query(Patient).order_by(Patient.age.asc())
+        rendered_template = render_template('view_patients.html', patients=patients)
+
+    if request.args.get('filterby','') == 'familyname':
+        patients = db.session.query(Patient).order_by("Patient.family_name")
+        rendered_template = render_template('view_patients.html', patients=patients)
+
+    return rendered_template
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -142,7 +158,7 @@ def login():
 
 @app.route('/')
 def sample():
-    return render_template('sample.html')
+    return redirect('/login')
 
 @app.route('/patients/update/<user_name>')
 def update_patient(user_name):

@@ -6,6 +6,9 @@
             <div class="row">
                 <div class="twelve columns">
                     <h1>Patient List</h1>
+                    <a href="/patients?filterby=agedesc" class="button">Sort by Age(Desc)</a>
+                    <a href="/patients?filterby=ageasc" class="button">Sort by Age(Asc)</a>
+                    <a href="/patients?filterby=familyname" class="button">Sort by Family name</a>
                     <table>
                         <tr>
                             <th>Date Admitted</th>
@@ -28,6 +31,7 @@
                         </tr>
                         {% endfor %}
                     </table>
+                    <a href="patients/add" class="button-primary">Add Patient</a>
                 </div>
             </div>
         </div>
