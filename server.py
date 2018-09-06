@@ -15,7 +15,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:/Users/John Rey Faciolan/Desktop/Project Arrow/test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 app.config['SECRET_KEY'] = 'S#I#N#O#A#N#G#P#A#G#L#A#U#M#M#O'
 db = SQLAlchemy(app)
 
@@ -198,8 +198,8 @@ def update_patient(user_name):
     return render_template('update_patient.html', patient=patient, form=form)
 
 if __name__ == '__main__':
-    #db.drop_all()
-    #db.create_all()
+    db.drop_all()
+    db.create_all()
     app.run(debug=True)
 
 
