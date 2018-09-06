@@ -2,6 +2,7 @@
 
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import or_
 
 from flask.ext.wtf import Form
 from wtforms import StringField, SubmitField
@@ -33,12 +34,23 @@ class RegisterForm(Form):
     metroprolol = IntegerField('Metroprolol Count', validators=[Required()])
     anti_histamine = IntegerField('Anti-histamine Count', validators=[Required()])
     paracetamol = IntegerField('Paracetamol Count', validators=[Required()])
+
+    #General Information details
+    sss = StringField('SSS Number', validators=[Required()])
+    gsis = StringField('GSIS Number', validators=[Required()])
+    discharge_case = StringField('Discharge Case', validators=[Required()])
+    discharge_summary = StringField('Discharge Case', validators=[Required()])
+    discharge_from = StringField('Discharge From', validators=[Required()])
     submit = SubmitField('Add Patient')
 
 class LoginForm(Form):
     user_name = StringField('User Name', validators=[Required()])
     password = PasswordField('Password', validators=[Required()])
     submit = SubmitField('Login')
+
+class SearchForm(Form):
+    query = StringField('Search Patient')
+    submit = SubmitField('Search')
 
 class Patient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -56,6 +68,13 @@ class Patient(db.Model):
     metroprolol = db.Column(db.Integer, nullable=True)
     anti_histamine = db.Column(db.Integer, nullable=True)
     paracetamol = db.Column(db.Integer, nullable=True)
+
+    #General Info
+    sss = db.Column(db.String(80), nullable=True)
+    gsis = db.Column(db.String(80), nullable=True)
+    discharge_case = db.Column(db.String(80), nullable=True)
+    discharge_summary = db.Column(db.String(80), nullable=True)
+    discharge_from = db.Column(db.String(80), nullable=True)
 
     @property
     def password(self):
@@ -105,6 +124,11 @@ def add_patient():
         user.metroprolol = form.metroprolol.data
         user.anti_histamine = form.anti_histamine.data
         user.paracetamol = form.paracetamol.data
+        user.sss = form.sss.data
+        user.gsis = form.gsis.data
+        user.discharge_summary = form.discharge_summary.data
+        user.discharge_from = form.discharge_from.data
+        user.discharge_case = form.discharge_case.data
         db.session.add(user)
         db.session.commit()
         rendered_template = render_template('add_patient_confirmed.html', patient=patient)
@@ -114,22 +138,29 @@ def add_patient():
 @app.route('/patients', methods=['GET', 'POST'])
 def patients_list():
     rendered_template = None
-
+    form = SearchForm()
+    
     if request.method == 'GET':
         patients = Patient.query.all()
-        rendered_template = render_template('view_patients.html', patients=patients)
+        rendered_template = render_template('view_patients.html', form=form, patients=patients,)
     
     if request.args.get('filterby','') == 'agedesc':
         patients = db.session.query(Patient).order_by(Patient.age.desc())
-        rendered_template = render_template('view_patients.html', patients=patients)
+        rendered_template = render_template('view_patients.html', patients=patients, form=form)
 
     if request.args.get('filterby','') == 'ageasc':
         patients = db.session.query(Patient).order_by(Patient.age.asc())
-        rendered_template = render_template('view_patients.html', patients=patients)
+        rendered_template = render_template('view_patients.html', patients=patients, form=form)
 
     if request.args.get('filterby','') == 'familyname':
         patients = db.session.query(Patient).order_by("Patient.family_name")
-        rendered_template = render_template('view_patients.html', patients=patients)
+        rendered_template = render_template('view_patients.html', patients=patients, form=form)
+
+    if request.method == 'POST':
+        q = form.query.data
+        print(q)
+        patients = db.session.query(Patient).filter(or_(Patient.user_name == q, Patient.middle_name == q, Patient.family_name == q, Patient.first_name == q))
+        rendered_template = render_template('view_patients.html', patients=patients, form=form)
 
     return rendered_template
 

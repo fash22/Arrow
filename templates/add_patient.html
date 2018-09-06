@@ -21,11 +21,24 @@
                         <div class="four columns">{{ form.family_name.label }} {{ form.family_name()}}</div>
                     </div>
                     <div class="row">
-                        {{ form.bp.label }} {{ form.bp }}
-                        {{ form.metroprolol.label }} {{ form.metroprolol }}
-                        {{ form.anti_histamine.label }} {{ form.anti_histamine }}
-                        {{ form.paracetamol.label }} {{ form.paracetamol }}
+                        <div class="four columns">
+                            {{ form.bp.label }} {{ form.bp }}
+                        </div>
+                        <div class="four columns">{{ form.metroprolol.label }} {{ form.metroprolol }}</div>
+                        <div class="four columns">{{ form.anti_histamine.label }} {{ form.anti_histamine }}</div>
                     <br>
+                    </div>
+                    <div class="row">
+                        <div class="four columns">
+                            {{ form.paracetamol.label }} {{ form.paracetamol }}
+                        </div>
+                        <div class="four columns">{{ form.sss.label }} {{ form.sss() }}</div>
+                        <div class="four columns">{{ form.gsis.label }} {{ form.gsis }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="four columns">{{ form.discharge_case.label }} {{ form.discharge_case }}</div>
+                        <div class="four columns">{{ form.discharge_summary.label }} {{ form.discharge_summary }}</div>
+                        <div class="four columns">{{ form.discharge_from.label }} {{ form.discharge_from }}</div>
                     </div>
                     <div class="row">
                         <div class="four columns offset-by-four columns">
